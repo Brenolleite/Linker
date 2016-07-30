@@ -1,0 +1,9 @@
+{
+  "name": "Linker",
+  "version": "0.0.1",
+  "author": "Breno Leite",
+  "dependencies": {
+    "mysql": "latest",
+    "binary-search-tree": "~0.2.6"
+  }
+}
