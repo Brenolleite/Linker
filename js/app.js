@@ -7,4 +7,22 @@ var mysql  = require('mysql'),
               database: 'control'
              });
 
+
+loadDefaultValues([{
+                          func_name: 'teste',
+                          params_values:{
+                                          teste: 1
+                                        }
+                        },
+                        {
+                          func_name: 'f_login',
+                          params_values:{
+                                          psessId: 'LOLFunciona'
+                                        }
+                        }]);
+
+      link('f_login', {pemail: 'brenolleite@gmail.com',
+                       psenha: 'teste',
+                       psessId: 'OO'});
+
 linker.start(conn);
