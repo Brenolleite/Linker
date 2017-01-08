@@ -4,6 +4,7 @@
   "author": "Breno Leite",
   "dependencies": {
     "mysql": "latest",
-    "binary-search-tree": "~0.2.6"
+    "binary-search-tree": "~0.2.6",
+    "q": "git://github.com/microjs/q"
   }
 }

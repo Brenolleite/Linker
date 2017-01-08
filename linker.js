@@ -1,6 +1,13 @@
 var AVLTree = require('binary-search-tree').AVLTree,
+    Q = require('q'),
     tree    = new AVLTree(),
     defaultValues = {};
+
+module.exports = {
+  start: start,
+  loadDefaultValues: loadDefaultValues,
+  link: link
+}
 
 function generateCode(name){
   var strCode = '',
@@ -41,8 +48,10 @@ function organize(rows){
                   func_params: {}                 
                 });
 
-      list[index].func_params[row.param_name] = {type:  row.param_type,
-                                                 value: null};
+      list[index].func_params[row.param_name] = {
+                                                  type:  row.param_type,
+                                                  value: null
+                                                };
     }
   });
 
@@ -120,7 +129,9 @@ function loadDefaultValues (configs){
   });
 }
 
-exports.start = function(connection){
+function start(connection){
+  var deffered = Q.defer();
+  
   connection.connect();
   
   connection.query('select SPECIFIC_SCHEMA as schema_name, ' +
@@ -133,11 +144,13 @@ exports.start = function(connection){
   function(err, rows) {
     if (!err){
       createAVL(rows);
-      return 'OK';
+      deffered.resolve('OK');
     }
     else
-      return 'Error while fetching parameters from MySQL.';
+      deffered.reject('Error while fetching parameters from MySQL.');
   });
 
   connection.end();
+
+  return deffered.promise;
 }
